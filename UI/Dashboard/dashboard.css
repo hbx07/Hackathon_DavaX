@@ -1,0 +1,211 @@
+/* dashboard.css */
+:root {
+  /* Color and layout variables */
+  --bg: #54728A;
+  --panel: #f6f8fa;
+  --ink: #0a0a0a;
+  --muted: #5f6b76;
+  --primary: #2b66c3;
+  --radius: 22px;
+  --touch: 56px; /* min touch height */
+  --font: 1.125rem; /* base size (18px) */
+}
+
+/* Reset and base styles */
+* { box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+body.dyslexic {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', Arial, sans-serif !important;
+}
+
+/* Layout containers */
+.wrap {
+  max-width: 880px;
+  margin: 24px auto;
+  padding: 12px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
+/* Header section */
+.header {
+  background: #FF5640;
+  color: #fff;
+  padding: 20px 24px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.name {
+  font-size: clamp(1.5rem, 2.2vw + 1rem, 2.25rem);
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.profile {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem .9rem;
+  background: rgba(255,255,255,.14);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.25);
+  font-size: 1rem; /* Adjust this value for button text size */
+}
+
+/* Main panel */
+.panel {
+  padding: 20px 16px 24px;
+}
+h1 {
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem);
+  margin: 10px 6px 14px;
+}
+
+/* Bills list */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Bill card */
+.bill {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 18px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "title action" "meta action";
+  gap: 8px;
+  align-items: center;
+}
+.bill h2 {
+  grid-area: title;
+  margin: 0;
+  font-size: 1.6rem;
+}
+.meta {
+  grid-area: meta;
+  display: flex;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.meta b {
+  color: var(--ink);
+}
+.actions {
+  grid-area: action;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Buttons */
+.btn {
+  min-height: var(--touch);
+  padding: .75rem 1.1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  font-size: 1.125rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.btn:focus {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+.btn.primary {
+  background: #68B5E8;
+  color: #fff;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+/* Note section */
+.note {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.12);
+  color: #1f2937;
+  background: #f9fafb;
+}
+
+/* Toolbar and accessibility controls */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.seg button {
+  background: #fff;
+  padding: .5rem .75rem;
+  border: 0;
+  cursor: pointer;
+}
+.seg button+button {
+  border-left: 1px solid rgba(0,0,0,.15);
+}
+
+/* Scam warning */
+.scam {
+  margin-top: 18px;
+  font-size: 1rem;
+}
+.scam a {
+  color: var(--primary);
+}
+
+/* High contrast toggle */
+.hc body {
+  background: #000;
+  color: #fff;
+}
+.hc .header {
+  background: #000;
+  border-bottom: 2px solid #fff;
+}
+.hc .card {
+  background: #000;
+  border-color: #fff;
+}
+.hc .bill {
+  background: #000;
+  border-color: #fff;
+}
+.hc .btn {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+.hc .btn.primary {
+  background: #ff0;
+  color: #000;
+}
+
+/* Responsive panel padding */
+@media (min-width: 640px) {
+  .panel {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="card">
+            <!-- Header Section -->
+            <div class="header">
+                <div class="name" aria-label="Nume utilizator">Andrei Popescu</div>
+                <div class="toolbar" aria-label="Setări de accesibilitate">
+                    <div class="seg" role="group" aria-label="Mărime text">
+                        <button type="button" id="dec">A-</button>
+                        <button type="button" id="inc">A+</button>
+                    </div>
+                    <button type="button" id="dyslexic" class="profile" aria-pressed="false" aria-label="Comutare font dislexic">🔤 Fonturi Lizibile</button>
+                </div>
+            </div>
+            <!-- Main Panel -->
+            <div class="panel">
+                <h1>Facturi</h1>
+                <!-- Status Filter Icons -->
+                <div class="status-filters" style="display:flex;gap:18px;margin-bottom:18px;align-items:center;">
+                    <button class="status-filter" data-status="success" aria-label="Filtru facturi achitate" type="button">
+                        <img src="../Images/success.svg" alt="Achitat" height="28" width="28">
+                    </button>
+                    <button class="status-filter" data-status="warning" aria-label="Filtru facturi scadente" type="button">
+                        <img src="../Images/warning.svg" alt="Scadent" height="28" width="28">
+                    </button>
+                    <button class="status-filter" data-status="close" aria-label="Filtru facturi anulate" type="button">
+                        <img src="../Images/close.svg" alt="Anulat" height="28" width="28">
+                    </button>
+                </div>
+                <!-- Bills List -->
+                <div class="row" id="billsRow" role="list" aria-label="Lista furnizorilor">
+                    <!-- Bills will be loaded here by JS -->
+                </div>
+                <!-- Note Section -->
+                <div class="note scam" role="note">
+                    Nu partajați datele de plată la telefon. <a href="#" aria-label="Deschideți ajutorul">Aveți nevoie de ajutor?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

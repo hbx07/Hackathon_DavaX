@@ -1,3 +1,5 @@
-Starting the web-server:
+Installing the packages :
+    pip install -r requirements.txt
 
-uvicorn app.web_api.core.main:app --reload
+Starting the web-server:
+    uvicorn app.web_api.core.main:app --reload

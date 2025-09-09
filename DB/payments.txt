@@ -1,0 +1,23 @@
+=== PAYER TABLE ===
+(1, 'Alice Popescu', '1960101223344', 'alice.popescu@example.com', '+40 721 111 111')
+(2, 'Bogdan Ionescu', '1790202333445', 'bogdan.ionescu@example.com', '+40 722 222 222')
+(3, 'Carmen Dobre', '2820303444556', 'carmen.dobre@example.com', '+40 723 333 333')
+(4, 'Dan Marinescu', '1900404555667', 'dan.marinescu@example.com', '+40 724 444 444')
+(5, 'Elena Matei', '2910505666778', 'elena.matei@example.com', '+40 725 555 555')
+(6, 'Felix Radu', '1840606777889', 'felix.radu@example.com', '+40 726 666 666')
+(7, 'Gina Petrescu', '2870707888990', 'gina.petrescu@example.com', '+40 727 777 777')
+(8, 'Horațiu Pavel', '1910808999001', 'horatiu.pavel@example.com', '+40 728 888 888')
+(9, 'Irina Stoica', '2920910111222', 'irina.stoica@example.com', '+40 729 999 999')
+(10, 'Jude Sandu', '1801011222333', 'jude.sandu@example.com', '+40 730 000 000')
+
+=== TRANSACTIONS TABLE ===
+(1, '1960101223344', 1250.5, 'RON', '2025-02-14 10:30:00', 'PAID', 'SC Cometa SRL', 'INV-1001')
+(2, '1790202333445', 899.99, 'RON', '2025-03-03 14:45:00', 'PENDING', 'Alpha Logistics SA', 'INV-1002')
+(3, '2820303444556', 2150.0, 'RON', '2025-04-10 09:15:00', 'PAID', 'Nova Media Group', 'INV-1003')
+(4, '1900404555667', 470.35, 'RON', '2025-05-21 11:20:00', 'FAILED', 'GreenLine Solutions', 'INV-1004')
+(5, '2910505666778', 3275.75, 'RON', '2025-06-05 16:40:00', 'PAID', 'TransEuro Freight', 'INV-1005')
+(6, '1840606777889', 199.0, 'RON', '2025-06-27 08:55:00', 'PENDING', 'Delta Consulting', 'INV-1006')
+(7, '2870707888990', 780.4, 'RON', '2025-07-11 12:10:00', 'PAID', 'Pixel Yard SRL', 'INV-1007')
+(8, '1910808999001', 1420.1, 'RON', '2025-08-08 13:35:00', 'PAID', 'Brisk Retail Group', 'INV-1008')
+(9, '2920910111222', 350.0, 'RON', '2025-08-19 17:25:00', 'FAILED', 'BlueSky Catering', 'INV-1009')
+(10, '1801011222333', 4888.9, 'RON', '2025-09-01 15:50:00', 'PENDING', 'Vega Industrial SA', 'INV-1010')

@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autentificare</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autentificare</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="login-bg">
-        <div class="login-container">
-            <div class="login-logo">
-                <img src="../Images/endava_symbol_RGB.svg" alt="Endava Logo" style="height:50px;width:auto;">
-            </div>
-            <h1 class="login-title">Autentificare</h1>
-            <form id="loginForm">
-                <div class="form-row">
-                    <label for="cnp">CNP</label>
-                    <input type="text" id="cnp" name="cnp" placeholder="CNP" required>
-                </div>
-                <div class="form-row">
-                    <label for="nume">Nume</label>
-                    <input type="text" id="nume" name="nume" placeholder="Nume" required>
-                </div>
-                <div class="form-row">
-                    <label for="prenume">Prenume</label>
-                    <input type="text" id="prenume" name="prenume" placeholder="Prenume" required>
-                </div>
-                <button type="submit" class="login-btn">Autentifică-te</button>
-            </form>
+  <div class="login-bg">
+    <div class="login-container">
+      <div class="login-logo">
+        <img src="../Images/endava_symbol_RGB.svg" alt="Endava Logo" style="height:50px;width:auto;">
+      </div>
+      <h1 class="login-title">Autentificare</h1>
+
+      <form id="loginForm" novalidate>
+        <div class="form-row">
+          <label for="cnp">CNP</label>
+          <input type="text" id="cnp" name="cnp" placeholder="CNP" required>
         </div>
+        <div class="form-row">
+          <label for="nume">Nume</label>
+          <input type="text" id="nume" name="nume" placeholder="Nume" required>
+        </div>
+        <div class="form-row">
+          <label for="prenume">Prenume</label>
+          <input type="text" id="prenume" name="prenume" placeholder="Prenume" required>
+        </div>
+
+        <!-- Hibaüzenet helye -->
+        <div id="loginError" aria-live="polite"></div>
+
+        <button type="submit" class="login-btn" id="loginBtn">Autentifică-te</button>
+      </form>
     </div>
-    <script src="login.js"></script>
+  </div>
+
+  <script src="login.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# app/api/auth.py
+# app/web_api/api/auth.py
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field, field_validator
@@ -6,15 +6,15 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from uuid import UUID
 
-from app.web_api.core.database import get_db, User
+from ..core.database import get_db, User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-# Swagger-barát Bearer séma (jobb felső "Authorize" gomb)
+# Swagger-barát Bearer scheme (jobb felső "Authorize" gomb a /docs-on)
 bearer_scheme = HTTPBearer(auto_error=True)
 
 
-# ----------- Pydantic modellek -----------
+# ---------- Pydantic modellek ----------
 class LoginIn(BaseModel):
     cnp: str = Field(..., description="CNP (13 számjegy)")
     last_name: str = Field(..., min_length=1, description="Nume (vezetéknév)")
@@ -40,13 +40,13 @@ class LoginOut(BaseModel):
     user: UserOut
 
 
-# ----------- Helper: aktuális user a Bearer tokenből -----------
+# ---------- Helper: aktuális user a Bearer tokenből ----------
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
     db: Session = Depends(get_db),
 ) -> UserOut:
     """
-    Swagger 'Authorize' mezőjébe CSAK a tokent írd: DEMO::<cnp>
+    A Swagger 'Authorize' mezőjébe CSAK a tokent írd: DEMO::<cnp>
     (A 'Bearer ' előtagot a Swagger automatikusan hozzáteszi.)
     """
     if credentials.scheme.lower() != "bearer":
@@ -63,7 +63,7 @@ def get_current_user(
     return UserOut(id=user.id, cnp=user.cnp, last_name=user.last_name, first_name=user.first_name)
 
 
-# ----------- VÉGPONTOK -----------
+# ---------- Végpontok ----------
 @router.post("/login", response_model=LoginOut)
 def login(payload: LoginIn, db: Session = Depends(get_db)):
     """
@@ -75,7 +75,7 @@ def login(payload: LoginIn, db: Session = Depends(get_db)):
     """
     user = db.scalar(select(User).where(User.cnp == payload.cnp))
     if not user:
-        raise HTTPException(status_code=401, detail="User not found in database")
+        raise HTTPException(status_code=401, detail="Utilizatorul nu există sau datele nu corespund.")
 
     # név-ellenőrzés (kis/nagybetű független, trim)
     if user.last_name.strip().lower() != payload.last_name.strip().lower() or \

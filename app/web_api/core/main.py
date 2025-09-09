@@ -38,7 +38,7 @@ def resolve_ui_dir() -> Path:
             return p
     raise RuntimeError("UI directory not found. Tried: " + " | ".join(map(str, candidates)))
 
-UI_DIR = Path(r"C:\Endava\EndevLocal\TechFest\Hackathon_DavaX\UI")
+UI_DIR = resolve_ui_dir()
 
 # html=True: ha könyvtárat kérsz be (pl. /ui/), index.html-t keres.
 app.mount("/ui", StaticFiles(directory=str(UI_DIR), html=True), name="ui")

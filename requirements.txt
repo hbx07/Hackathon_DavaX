@@ -2,3 +2,8 @@ openai
 speechrecognition
 pyttsx3
 pyaudio
+fastapi
+uvicorn
+pydantic
+python-dotenv
+sqlalchemy

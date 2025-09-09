@@ -2,3 +2,8 @@ openai
 speechrecognition
 pyttsx3
 pyaudio
+sounddevice
+scipy
+fastapi
+uvicorn
+python-multipart

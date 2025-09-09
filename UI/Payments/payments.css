@@ -233,3 +233,14 @@ input[type="text"]:focus {
 .chat-form button:hover {
   background: #1a4a8a;
 }
+.form-row input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+.form-row .currency {
+  font-size: 1.1rem;
+  color: #888;
+  margin-left: 8px;
+  white-space: nowrap;
+}

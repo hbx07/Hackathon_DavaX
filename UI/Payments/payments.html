@@ -22,10 +22,11 @@
                     <div class="form-row">
                         <label for="amount">Sumă</label>
                         <input type="text" id="amount" name="amount" readonly>
+                        <span class="currency">RON</span>
                     </div>
                     <div class="form-row">
                         <label for="card">Număr card</label>
-                        <input type="text" id="card" name="card" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                        <input type="text" id="card" name="card" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required pattern="\d{4} \d{4} \d{4} \d{4}">
                     </div>
                     <div class="form-row">
                         <label for="exp">Expirare</label>

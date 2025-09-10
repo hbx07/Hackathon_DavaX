@@ -1,7 +1,7 @@
 import openai
 import pyttsx3
 from fastapi import FastAPI, Request, File, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import re
@@ -9,6 +9,7 @@ import tempfile
 from pathlib import Path
 import mimetypes
 from openai import OpenAI
+import io
 
 app = FastAPI()
 
@@ -109,6 +110,24 @@ async def speech(audio: UploadFile = File(...)):
         import traceback
         print("Whisper transcription error:", e)
         traceback.print_exc()
+        return JSONResponse({'error': str(e)}, status_code=500)
+
+@app.post('/tts')
+async def tts(request: Request):
+    data = await request.json()
+    text = data.get('text', '')
+    if not text:
+        return JSONResponse({'error': 'No text provided'}, status_code=400)
+    try:
+        client = OpenAI()
+        response = client.audio.speech.create(
+            model="gpt-4o-mini-tts",
+            input=text,
+            voice="nova"
+        )
+        audio_bytes = response.content if hasattr(response, 'content') else response
+        return StreamingResponse(io.BytesIO(audio_bytes), media_type="audio/mpeg")
+    except Exception as e:
         return JSONResponse({'error': str(e)}, status_code=500)
 
 if __name__ == "__main__":

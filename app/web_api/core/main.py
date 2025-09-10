@@ -7,7 +7,8 @@ from pathlib import Path
 import os
 
 from ..api.auth import router as auth_router
-from .database import seed_default_user
+from ..api.bills import router as bills_router
+from .database import seed_default_user, seed_bills_for_user
 
 app = FastAPI(title="payments-api", docs_url="/api/docs", redoc_url=None)
 
@@ -20,12 +21,11 @@ app.add_middleware(
 
 @app.on_event("startup")
 def _seed_on_startup() -> None:
-    seed_default_user()
+    user = seed_default_user()
+    seed_bills_for_user(user.id)
 
+# --- UI mount (amit korábban beállítottunk) ---
 def resolve_ui_dir() -> Path:
-    # 1) CWD/UI (onnan indítod az uvicornt)
-    # 2) <repo gyökér>/UI (main.py -> core -> web_api -> app -> repo gyökér)
-    # 3) egyéb fallbackek
     candidates = [
         Path(os.getcwd()) / "UI",
         Path(__file__).resolve().parents[3] / "UI",
@@ -36,31 +36,19 @@ def resolve_ui_dir() -> Path:
         if p.exists() and p.is_dir():
             print(f"[UI] Serving static files from: {p}")
             return p
-    raise RuntimeError("UI directory not found. Tried: " + " | ".join(map(str, candidates)))
-
-UI_DIR = Path(r"C:\Endava\EndevLocal\TechFest\Hackathon_DavaX\UI")
-
-# html=True: ha könyvtárat kérsz be (pl. /ui/), index.html-t keres.
+    raise RuntimeError("UI directory not found.")
+UI_DIR = resolve_ui_dir()
 app.mount("/ui", StaticFiles(directory=str(UI_DIR), html=True), name="ui")
-
-def login_path_under_ui() -> str:
-    """Döntsük el, hol van a login.html, és arra irányítsunk."""
-    if (UI_DIR / "login.html").exists():
-        print("[UI] Found login at UI/login.html")
-        return "/ui/login.html"
-    if (UI_DIR / "Login" / "login.html").exists():
-        print("[UI] Found login at UI/Login/login.html")
-        return "/ui/Login/login.html"
-    # ha egyik sincs, akkor legalább logoljunk hasznosat
-    print("[UI] login.html not found at UI/login.html or UI/Login/login.html")
-    return "/ui/login.html"  # default próbálkozás
 
 @app.get("/", include_in_schema=False)
 def root_redirect():
-    return RedirectResponse(url=login_path_under_ui(), status_code=307)
+    # nálatok UI/Login/login.html a login
+    return RedirectResponse(url="/ui/Login/login.html", status_code=307)
 
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
+# API-k
 app.include_router(auth_router)
+app.include_router(bills_router)

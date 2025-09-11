@@ -130,6 +130,35 @@ document.addEventListener('DOMContentLoaded', function () {
       })
         .then(res => res.json())
         .then(data => {
+            const aiMsg = document.createElement('div');
+            aiMsg.textContent = 'AI: ' + (data.reply || 'Eroare răspuns AI');
+            aiMsg.style.color = '#2b66c3';
+            chatMessages.appendChild(aiMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            // Play TTS for AI reply
+            if (data.reply) {
+                fetch('http://localhost:5000/tts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: data.reply })
+                })
+                .then(resp => resp.ok ? resp.blob() : null)
+                .then(blob => {
+                    if (blob) {
+                        const url = URL.createObjectURL(blob);
+                        const audio = new Audio(url);
+                        audio.play();
+                    }
+                });
+            }
+            // Autofill form fields if slots are present
+            if (data.slots) {
+                if (data.slots.receiver) form.receiver.value = data.slots.receiver;
+                if (data.slots.amount) form.amount.value = data.slots.amount;
+                if (data.slots.card) form.card.value = formatCardNumber(data.slots.card);
+                if (data.slots.exp) form.exp.value = data.slots.exp;
+                if (data.slots.cvv) form.cvv.value = data.slots.cvv;
+            }
           const aiMsg = document.createElement('div');
           aiMsg.textContent = 'AI: ' + (data.reply || 'Eroare răspuns AI');
           aiMsg.style.color = '#2b66c3';

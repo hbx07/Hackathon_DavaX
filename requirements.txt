@@ -11,4 +11,3 @@ uvicorn
 pydantic
 python-dotenv
 sqlalchemy
-sqlite3

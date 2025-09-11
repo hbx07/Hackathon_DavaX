@@ -77,11 +77,11 @@ def seed_bills_for_user(user_id: str) -> None:
             return
         sample = [
             Bill(user_id=user_id, company="Electrica", amount=150.0, status=BillStatus.DUE.value,
-                 description="Factura energie", due_date="2025-05-10"),
+                 description="Factura energie", due_date="2025-09-22"),
             Bill(user_id=user_id, company="Digi", amount=65.0, status=BillStatus.DUE.value,
-                 description="Abonament internet", due_date="2025-05-20"),
+                 description="Abonament internet", due_date="2025-10-20"),
             Bill(user_id=user_id, company="E.ON", amount=120.0, status=BillStatus.DUE.value,
-                 description="Gaz", due_date="2025-05-25"),
+                 description="Gaz", due_date="2025-09-25"),
         ]
         db.add_all(sample)
         db.commit()
